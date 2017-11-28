@@ -2,7 +2,7 @@ module.exports = {
   /**
    * 格式化为价格，如 ￥12.99
    * @param number|string digit 被格式化的原数
-   * @param 
+   * @param number places 保留的位数
    * @return string 格式化后的数
    */
   formatNumber(digit, places = 2) {
