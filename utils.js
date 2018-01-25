@@ -48,7 +48,7 @@ module.exports = {
 	 *此方法是将字符串中的&amp;转成&
 	 *@param {String} str 未被转换的字符串
 	 *@return {String} str 转换后的字符串
-	 * */
+	 **/
 	changeToUtf16Str: function(str){
 		var reg = /&amp;/g,
 		str = str.replace(reg, function(char) {
