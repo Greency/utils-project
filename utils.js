@@ -4,7 +4,7 @@ module.exports = {
    * @param number|string digit 被格式化的原数
    * @param number places 保留的位数
    * @return string 格式化后的数
-   */
+   * */
   formatNumber: function(digit, places = 2) {
     var _digit = '' + digit,
       _index = _digit.indexOf('.') // “ . ”的索引
