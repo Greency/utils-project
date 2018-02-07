@@ -20,15 +20,15 @@ module.exports = {
     }
   },
   /*
-	 *用户移动端emoji表情在数据库中的存储
-	 *用于把用utf16编码的字符转换成实体字符，以供后台存储 
-	 *@param  {String} str 将要转换的字符串，其中含有utf16字符将被自动检出 
-	 *@return {String} str 转换后的字符串，utf16字符将被转换成&#xxxx;形式的实体字符 
-	 * */
-	utf16toEntities: function(str) {
-		var reg = /[\ud800-\udbff][\udc00-\udfff]/g,
-		str = str.replace(reg, function(char) {
-			var H, L, code
+  *用户移动端emoji表情在数据库中的存储
+  *用于把用utf16编码的字符转换成实体字符，以供后台存储 
+  *@param  {String} str 将要转换的字符串，其中含有utf16字符将被自动检出 
+  *@return {String} str 转换后的字符串，utf16字符将被转换成&#xxxx;形式的实体字符 
+  * */
+  utf16toEntities: function(str) {
+    var reg = /[\ud800-\udbff][\udc00-\udfff]/g,
+	str = str.replace(reg, function(char) {
+		var H, L, code
 			if(char.length === 2) {
 				H = char.charCodeAt(0)
 				L = char.charCodeAt(1)
@@ -55,5 +55,17 @@ module.exports = {
 			return '&'
 		})
 		return str
+	},
+	/*
+	 *防止undefined
+	 *@param {String|Number|Object} initValue 初始值
+	 *@param {String|Number} translateValue 需要将undefined值转换成什么值
+	 * */
+	translateUndefined: function(initValue, translateValue) {
+		if(typeof initValue === 'undefined' || initValue === null) {
+			return translateValue || ''
+		} else {
+			return initValue
+		}
 	}
 }
