@@ -63,7 +63,7 @@ module.exports = {
 	 * */
 	translateUndefined: function(initValue, translateValue) {
 		if(typeof initValue === 'undefined' || initValue === null) {
-			return translateValue || ''
+			return translateValue
 		} else {
 			return initValue
 		}
