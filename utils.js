@@ -20,10 +20,10 @@ module.exports = {
     }
   },
   /*
-  *用户移动端emoji表情在数据库中的存储
-  *用于把用utf16编码的字符转换成实体字符，以供后台存储 
-  *@param  {String} str 将要转换的字符串，其中含有utf16字符将被自动检出 
-  *@return {String} str 转换后的字符串，utf16字符将被转换成&#xxxx;形式的实体字符 
+  * 用户移动端emoji表情在数据库中的存储
+  * 用于把用utf16编码的字符转换成实体字符，以供后台存储 
+  * @param  {String} str 将要转换的字符串，其中含有utf16字符将被自动检出 
+  * @return {String} str 转换后的字符串，utf16字符将被转换成&#xxxx;形式的实体字符 
   * */
   utf16toEntities: function(str) {
     var reg = /[\ud800-\udbff][\udc00-\udfff]/g,
@@ -41,13 +41,13 @@ module.exports = {
 		return str
 	},
 	/*
-	 *&#xxxxxx;形式的字符串存入数据库后
-	 *读出来的形式为 &amp;#xxxxxx;
-	 *此种格式html解析不出来原有的符号
-	 *&被转成了&amp;
-	 *此方法是将字符串中的&amp;转成&
-	 *@param {String} str 未被转换的字符串
-	 *@return {String} str 转换后的字符串
+	 * &#xxxxxx;形式的字符串存入数据库后
+	 * 读出来的形式为 &amp;#xxxxxx;
+	 * 此种格式html解析不出来原有的符号
+	 * &被转成了&amp;
+	 * 此方法是将字符串中的&amp;转成&
+	 * @param {String} str 未被转换的字符串
+	 * @return {String} str 转换后的字符串
 	 **/
 	changeToUtf16Str: function(str){
 		var reg = /&amp;/g,
@@ -57,9 +57,9 @@ module.exports = {
 		return str
 	},
 	/*
-	 *防止undefined
-	 *@param {String|Number|Object} initValue 初始值
-	 *@param {String|Number} translateValue 需要将undefined值转换成什么值
+	 * 防止undefined
+	 * @param {String|Number|Object} initValue 初始值
+	 * @param {String|Number} translateValue 需要将undefined值转换成什么值
 	 * */
 	translateUndefined: function(initValue, translateValue) {
 		if(typeof initValue === 'undefined' || initValue === null) {
