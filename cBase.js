@@ -5,13 +5,12 @@ var b = (function(w){
   }
   
   function isEmpty(val){
-    console.log('val: ', val === '', '  typeof', typeof val === 'string' );
-
     if(val === undefined || val === 'undefined' || val === null) return true;
-    
+
     if(typeof val === 'string'){
       if(val.trim() === '') return true;
     }
+    
     if(val instanceof Array){
       if(val.length === 0) return true;
     }
