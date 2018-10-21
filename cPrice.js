@@ -1,15 +1,10 @@
 const cPrice = {
-    _a: 0,
-    _b: 0,
-    init(a, b){
-        this._a = parseFloat((a * 100).toFixed(10));
-        this._b = parseFloat((b * 100).toFixed(10));
-    },
     calculate(type, a, b){
-        this.init(a, b);
+        a = parseFloat((a * 100).toFixed(10));
+        b = parseFloat((b * 100).toFixed(10));
         switch(type){
-            case '+': return this.formatePrice(( this._a + this._b ) / 100);break;
-            case '*': return this.formatePrice(( this._a * this._b ) / 10000);break;
+            case '+': return this.formatePrice(( a + b ) / 100);break;
+            case '*': return this.formatePrice(( a * b ) / 10000);break;
         }
     },
     formatePrice(val){
