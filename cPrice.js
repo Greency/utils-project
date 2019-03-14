@@ -13,18 +13,25 @@ const cPrice = {
         }
         return this.formatePrice(res);
     },
-    formatePrice(val) {
-        val = val.toString();
-        let len = val.length,
-          pointIndex = val.indexOf('.');
-        if (pointIndex === -1) return `${val}.00`;
-        if (len - (pointIndex + 1) === 1) return `${val}0`;
-        return val;
+    formatePrice(val, digits) {
+      digits = digits || 2;
+      val = val.toString();
+      let len = val.length,
+        pointIndex = val.indexOf('.'),
+        suffix = '';
+  
+      for(let i = 0; i < digits; i++){
+        suffix += '0';
+      }
+  
+      if (pointIndex === -1) return `${val}.${suffix}`;
+      if (len - (pointIndex + 1) === 1) return `${val}0`;
+      return val;
     },
     add(a, b) {
-        return this.calculate('+', a, b);
+      return this.calculate('+', a, b);
     },
     x(a, b) {
-        return this.calculate('*', a, b);
+      return this.calculate('*', a, b);
     }
 }
