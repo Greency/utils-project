@@ -1,37 +1,70 @@
-const cPrice = {
-    calculate(type, a, b) {
-        let res = 0;
-        a = parseFloat((a * 100).toFixed(10));
-        b = parseFloat((b * 100).toFixed(10));
-        switch (type) {
-          case '+':
-            res = (a + b) / 100;
-            break;
-          case '*':
-            res = (a * b) / 10000;
-            break;
-        }
-        return this.formatePrice(res);
-    },
-    formatePrice(val, digits) {
-      digits = digits || 2;
-      val = val.toString();
-      let len = val.length,
-        pointIndex = val.indexOf('.'),
-        suffix = '';
-  
-      for(let i = 0; i < digits; i++){
-        suffix += '0';
+class Price {
+  constructor(initVal, digit = 2){
+      if (this.typeError(initVal)) return;
+      this.initVal = initVal;
+      this.digit = digit;
+  }
+
+  add(val){
+      return this.calc('+', val);
+  }
+  subtract(val){
+      return this.calc('-', val);
+  }
+  multiply(val){
+      return this.calc('*', val);
+  }
+  divide(val){
+      return this.calc('/', val);
+  }
+
+  calc(type, val){
+      if (this.typeError(val)) return;
+      
+      let initVal = parseFloat(this.initVal),
+          _val = parseFloat(val),
+          result = null;
+
+      switch(type){
+          case '+': result = initVal + _val; break;
+          case '-': result = initVal - _val; break;
+          case '*': result = initVal * _val; break;
+          case '/': result = initVal / _val; break;
+          default: return;
       }
-  
-      if (pointIndex === -1) return `${val}.${suffix}`;
-      if (len - (pointIndex + 1) === 1) return `${val}0`;
-      return val;
-    },
-    add(a, b) {
-      return this.calculate('+', a, b);
-    },
-    x(a, b) {
-      return this.calculate('*', a, b);
-    }
+
+      return this.formatPrice(result.toFixed(this.digit));
+  }
+
+  formatPrice(val){
+      let { digit } = this,
+          suffix = '',
+          zeroCount = 0,
+          suffixArray = val.toString().split('.');
+
+          if(suffixArray[1]){
+              zeroCount = this.digit - suffixArray[1].length;
+          } else {
+              suffix = '.';
+              zeroCount = this.digit;
+          }
+
+      while (zeroCount-- > 0) {
+          suffix += '0';
+      }
+      return `${val}${suffix}`;
+  }
+
+  typeError(initVal){
+      if (typeof initVal !== 'number') {
+          console.error('必须传入number类型');
+          return true;
+      }
+
+      return false;
+  }
+}
+
+export default function (initVal) {
+  return new Price(initVal);
 }
